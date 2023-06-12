@@ -1,0 +1,105 @@
+* Scale svg from center with css animation
+** ¿Cómo uso animateTransform en un SVG para escalar un objeto desde el punto central en lugar de la esquina superior izquierda?
+Cambie su transformación de escala y use aditivo="sum", luego aplique una transformación adicional que traduzca el círculo al centro de la imagen. Entonces, en lugar de definir la forma en el centro de la imagen, defina su centro como 0 0 y luego use el atributo de transformación para traducirlo a 50, 50 (el centro exacto de su imagen en particular).
+
+
+#+begin_src html
+
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100px" height="100px">
+        <circle style="fill:blue;" cx="0" cy="0" r="45" transform="translate(50 50)">
+          <animateTransform attributeName="transform"
+                            type="scale"
+                            additive="sum"
+                            from="0 0"
+                            to="1 1"
+                            begin="0s"
+                            dur="1s"
+                            repeatCount="indefinite"
+          />
+        </circle>
+      </svg>
+
+#+end_src
+
+Aquí hay otro ejemplo que usa las etiquetas defs y use para reutilizar la definición del círculo:
+#+begin_src html
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100px" height="100px">
+        <defs>
+          <circle id="def-circle" style="fill:#ff2cb7;" cx="0" cy="0" r="45" />
+        </defs>
+
+        <use xlink:href="#def-circle" transform="translate(50 50)">
+          <animateTransform attributeName="transform"
+                            type="scale"
+                            additive="sum"
+                            from="0 0"
+                            to="1 1"
+                            beg="0s"
+                            dur="1s"
+                            repeatCount="indefinite" />
+        </use>
+      </svg>
+#+end_src
+
+También podría haberlo hecho con la ayuda de los estilos CSS y la propiedad transform-origin.
+El beneficio es que no tiene que calcular coordenadas y trasladar sus objetos.
+#+begin_src html
+            <svg viewBox="0 0 100 100" width="100px" height="100px">
+              <path id="circle-origin" d="M 50, 50 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0">
+                <animateTransform
+                  attributeName="transform"
+                  type="scale"
+                  from="0.4"
+                  to="0.7"
+                  dur="5s"
+                  repeatCount="indefinite"/>
+              </path>
+            </svg>
+#+end_src
+
+#+begin_src css
+#circle-origin {
+    transform-origin: bottom;
+}
+#+end_src
+
+En su caso específico, otra forma más sería animar el radio del círculo mismo:
+#+begin_src html
+      <svg width="100px" height="100px">
+        <circle r="0" cx="50" cy="50">
+          <animate attributeName="r" from="0" to ="10" begin="1s" dur="300ms" repeatCount="indefinite" fill="freeze" />
+      </circle>
+      </svg>
+#+end_src
+
+Use transform-origin y transform-box.
+#+begin_src html
+      <div class="circle-example-notes">
+      <svg width="100px" height="100px" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <g id="circle-example" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <circle id="Oval" fill="#2A2C32" cx="50" cy="50" r="11.5"></circle>
+          </g>
+      </svg>
+      </div>
+#+end_src
+#+begin_src css
+.circle-example-notes {
+    width: 100px;
+    height: 100px;
+    background: rgba(0,0,0,0.2)
+}
+
+#circle-example {
+    transform: scale(1);
+    transform-box: fill-box;
+    transform-origin: center;
+    /* animation: circle .5s linear 1.3s forwards; */
+    animation: circle 5s linear 1.3s infinite;
+}
+
+@keyframes circle {
+    to {
+        transform: scale(4.1);
+    }
+}
+#+end_src
