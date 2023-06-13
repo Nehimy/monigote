@@ -105,3 +105,18 @@
 #circle-origin {
     transform-origin: bottom;
 }
+
+#chest-origin {
+    transform-origin: center;
+    animation: width-rect 5s infinite;
+}
+
+@keyframes width-rect {
+    0% { /* width:50px; */
+
+    }
+    100% { /* width:100px; */
+
+        transform: scaleX(0.9);
+    }
+}
