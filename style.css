@@ -54,7 +54,7 @@
     /* align-items: center; */
     height: 120px;
     width: 100px;
-    background: lightseagreen;
+    /* background: lightseagreen; */
     grid-column: 2;
     grid-row: 2;
 }
@@ -95,7 +95,7 @@
 }
 
 .second-leg {
-    background: darkcyan;
+    /* background: darkcyan; */
     width: 30px;
     height: 120px;
     grid-column: 2;
