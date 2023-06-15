@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=Righteous&display=swap');
 /*
    El valor border-box en el box-sizing hace que el padding y el border pasen a formar parte
    del cálculo del ancho de la caja.
@@ -13,27 +14,71 @@
     display: grid;
     width: 100vw;
     height: 100vh;
-    background: #3fe6af;
+    background: black;
     place-content: center;
+    background: radial-gradient(circle, rgb(60, 59, 59) 15%, rgb(0, 0, 0) 100%);
+
 
 }
 
 .container {
     display: grid;
-    width: 80vw;
-    height: 80vh;
-    background: white;
+    /* width: 70vw; */
+    /* height: 70vw; */
+    background: #9f9d9c;
     place-content: center;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgb(232, 232, 232) 50%, rgb(23, 23, 23) 100%);
+    animation: container-rotate 5s infinite ease-in-out;
 }
 
+@keyframes container-rotate {
+    0% {
+        background: radial-gradient(circle, rgb(232, 232, 232) 15%, rgb(23, 23, 23) 80%);
+    }
+        50% {
+        background: radial-gradient(circle, rgb(232, 232, 232) 20%, rgb(23, 23, 23) 80%);
+    }
+    100% {
+        background: radial-gradient(circle, rgb(232, 232, 232) 25%, rgb(23, 23, 23) 80%);
+    }
+}
 .monigote {
     display: grid;
     place-content: center;
-    width: 50vw;
-    height: 50vh;
-    background: #9f9d9c;
+    /* width: 50vw; */
+    /* height: 50vw; */
+    margin: 100px;
+    padding: 100px;
+    background: white;
+    border-radius: 50%;
     /* grid-template-columns: auto auto auto; */
     /* grid-template-rows: auto auto auto; */
+    background: radial-gradient(circle, rgb(255, 255, 255) 20%, rgb(223, 223, 223) 100%);
+}
+
+text {
+    display: grid;
+    place-content: center;
+    color: black;
+    font-family: 'Cherry Bomb One', cursive;
+    font-family: 'Righteous', cursive;
+    font-size: xx-large;
+    font-weight: 900;
+    animation: text-animate 5s infinite ease-in-out;
+}
+
+@keyframes text-animate {
+
+    0% {
+        transform: rotate3d(0, 1, 0, 0deg);
+        opacity: 0.3;
+    }
+
+    100% {
+        transform: rotate3d(0, 1, 0, 360deg);
+        opacity: 1;
+    }
 }
 
 .stick-man {
@@ -47,46 +92,48 @@
     cx:200px;
     cy:50px;
     r:45px;
-    fill:blue;
-    animation: move-vertically 5s infinite;
+    fill:#736c6c;
+    animation: move-vertically 5s infinite ease-in-out;
 }
 
 @keyframes move-vertically {
     0% {
         transform: translateY(0px);
     }
+    50% {
+        transform: translateY(8px);
+    }
     100% {
-        transform: translateY(10px);
+        transform: translateY(0px);
     }
 }
 
 .chest-g {
     display: grid;
-    /* transform: translate(50px, 50px); */
     transform-origin: center;
     width: 100px;
     height: 120px;
-    opacity: 0.5;
 }
-
 
 #chest {
     transform-origin: center;
     x:150px;
     y:95px;
     width: 100px;
-    height: 120px;
-    /* rx:15px; */
-    /* ry:15px; */
-    animation: width-rect 5s infinite;
+    height: 125px;
+    rx:5px;
+    animation: scalex-chest 5s infinite ease-in-out;
 }
 
-@keyframes width-rect {
+@keyframes scalex-chest {
     0% {
-        transform: scalex(1.1);
+        transform: scalex(1);
+    }
+    50% {
+        transform: scaleX(0.9);
     }
     100% {
-        transform: scalex(0.9);
+        transform: scalex(1);
     }
 }
 
@@ -96,62 +143,90 @@
 }
 
 #left-arm {
-    x:110px;
+    x:125px;
     y:95px;
-    width: 40px;
+    width: 25px;
     height: 120px;
-    fill: green;
-    opacity: 0.5;
+    fill: #736c6c;
     transform-origin: unset;
-    animation: move-left-arm 5s infinite;
+    animation: move-left-arm 5s infinite ease-in-out;
+    rx: 10px;
 }
 
 
 @keyframes move-left-arm {
     0% {
-        /* transform: scalex(0.4); */
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(5deg);
     }
     100% {
-        /* transform: scalex(0.9); */
-        rotate: 5deg;
+        transform: rotate(0deg);
     }
 }
 
 .right-arm {
     x:250px;
     y:95px;
-    width: 40px;
+    width: 25px;
     height: 120px;
-    fill: green;
-    opacity: 0.5;
+    fill: #736c6c;
     transform-origin: unset;
-    animation: move-right-arm 5s infinite;
+    animation: move-right-arm 5s infinite ease-in-out;
+    rx: 10px;
 }
 
 @keyframes move-right-arm {
     0% {
-        /* rotate: 0deg; */
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(-5deg);
     }
     100% {
-        /* rotate:-5deg; */
-        transform: rotate(-5deg);
+        /* rotate: 5deg; */
+        transform: rotate(0deg);
     }
 }
 
 .left-leg {
-    x:150px;
-    y:210px;
-    width: 40px;
+    x:165px;
+    y:200px;
+    width: 25px;
     height: 120px;
-    fill: #0dbdf7;
-    opacity: 0.5;
+    fill: #736c6c;
+    rx:10px;
 }
 
 .right-leg {
     x:210px;
-    y:210px;
-    width: 40px;
+    y:200px;
+    width: 25px;
     height: 120px;
-    fill: #0dbdf7;
-    opacity: 0.5;
+    fill: #736c6c;
+    rx:10px;
+}
+
+/* En pantallas de 412 px o menos, establezca el color de fondo en azul*/
+
+@media screen and (max-width: 412px) {
+    .container{
+        transform: scale(0.7);
+    }
+    .monigote {
+      margin: 55px;
+      padding: 0px;
+  }
+
+  text {
+  font-size: unset;
+  font-weight: 900;
+  margin-top: 20px;
+  }
+
+  .stick-man {
+      transform: scale(0.7);
+  }
+
 }
